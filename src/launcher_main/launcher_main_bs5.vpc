@@ -1,0 +1,22 @@
+$Macro OUTBINNAME "bs5"
+
+$Conditional "MOD_LAUNCHER" "1"
+
+$Include "launcher_main.vpc"
+
+$Configuration
+{
+	$Compiler
+	{
+		$PreprocessorDefinitions	"$BASE;MOD_APPID=243750" // Replace with your appid if you ship on Steam.
+	}
+}
+
+$Project "Launcher Main (Battle Supreme 5)"
+{
+    $Folder "Resource Files" [$WINDOWS]
+    {
+        $File   "launcher_main_bs5.rc"
+        $File   "res\bs5.ico"
+    }
+}

@@ -21,6 +21,7 @@ $Games
 	"PORTAL"
 	"SDK"
 	"TF"
+	"BS5"
 }
 
 $Include "vpc_scripts\projects.vgc"

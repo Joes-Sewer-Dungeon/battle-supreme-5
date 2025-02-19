@@ -17,11 +17,17 @@ $Project "client"
 {
 	"game\client\client_tf.vpc"			[$TF]
 	"game\client\client_hl2mp.vpc"		[$HL2MP]
+	"game\client\client_bs5.vpc"		[$BS5]
 }
 
 $Project "fgdlib"
 {
 	"fgdlib\fgdlib.vpc" [$WINDOWS]
+}
+
+$Project "game_shader_generic"
+{
+	"materialsystem\stdshaders\game_shader_generic_bs5.vpc" [$BS5]
 }
 
 $Project "game_shader_generic_example"
@@ -52,12 +58,14 @@ $Project "server"
 {
 	"game\server\server_tf.vpc"			[$TF]
 	"game\server\server_hl2mp.vpc"		[$HL2MP]
+	"game\server\server_bs5.vpc"		[$BS5]
 }
 
 $Project "launcher_main"
 {
 	"launcher_main\launcher_main_mod_hl2mp.vpc" [$HL2MP]
 	"launcher_main\launcher_main_mod_tf.vpc" [$TF]
+	"launcher_main\launcher_main_bs5.vpc" [$BS5]
 }
 
 $Project "mathlib"

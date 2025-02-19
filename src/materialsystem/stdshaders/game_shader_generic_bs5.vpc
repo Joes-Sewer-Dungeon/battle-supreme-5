@@ -1,0 +1,27 @@
+//-----------------------------------------------------------------------------
+//	game_shader_generic_bs5.vpc
+//
+//	Project Script for mods to use an an example of how to override shaders
+//-----------------------------------------------------------------------------
+
+$Macro SRCDIR		"..\.."
+$Macro OUTBINNAME "game_shader_generic"
+$Macro GAMENAME "bs5"
+$Include "$SRCDIR\materialsystem\stdshaders\game_shader_generic_example_base.vpc"
+
+$Project "Game Shaders (Battle Supreme 5)"
+{
+    $Folder "Source Files"
+    {
+        -$File	"example_model_dx9.cpp"
+		-$File	"example_model_dx9_helper.cpp"
+
+		-$File	"sdk_bloom.cpp"
+		-$File	"sdk_screenspace_general.cpp"
+    }
+
+    $Folder "Header Files"
+    {
+        -$File	"example_model_dx9_helper.h"
+    }
+}
