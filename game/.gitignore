@@ -1,0 +1,11 @@
+*/cfg/local_loadout.txt
+*/cfg/server_blacklist.txt
+
+*/GameState.txt
+*/stats.txt
+*/voice_ban.dt
+
+platform/config/InGameDialogConfig.vdf
+platform/config/ServerBrowser.vdf
+
+steam_appid.txt
