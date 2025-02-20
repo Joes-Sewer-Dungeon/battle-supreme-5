@@ -264,7 +264,7 @@ void CGameRules::RefreshSkillData ( bool forceUpdate )
 	}
 	GlobalEntity_Add( "skill.cfg", STRING(gpGlobals->mapname), GLOBAL_ON );
 
-#if !defined( TF_DLL ) && !defined( DOD_DLL )
+#if !defined( TF_DLL ) && !defined( DOD_DLL ) || defined(BS5)
 	char	szExec[256];
 #endif 
 
@@ -287,6 +287,15 @@ void CGameRules::RefreshSkillData ( bool forceUpdate )
 	engine->ServerCommand( szExec );
 	engine->ServerExecute();
 #endif // TF_DLL && DOD_DLL
+
+#if defined(BS5)
+
+	Q_snprintf(szExec, sizeof(szExec), "exec skill.cfg\n");
+
+	engine->ServerCommand(szExec);
+	engine->ServerExecute();
+
+#endif // BS5
 
 #endif // HL2_DLL
 #endif // CLIENT_DLL

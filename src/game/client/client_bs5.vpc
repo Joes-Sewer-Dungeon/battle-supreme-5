@@ -22,7 +22,7 @@ $Configuration
 	$Compiler
 	{
 		$AdditionalIncludeDirectories	".\hl2;.\hl2\elements;.\tf;.\tf\vgui;..\statemachine;$SRCDIR\game\shared\multiplayer;$SRCDIR\game\shared\tf;$SRCDIR\gcsdk\steamextra;$BASE;.\econ"
-		$AdditionalIncludeDirectories	"$BASE;.\bs5;$SRCDIR\game\shared\bs5"
+		$AdditionalIncludeDirectories	"$BASE;.\bs5;$SRCDIR\game\shared\bs5;$SRCDIR\game\shared\hl1"
 		$PreprocessorDefinitions		"$BASE;BS5;TF_CLIENT_DLL;USES_ECON_ITEMS;ENABLE_GC_MATCHMAKING;GLOWS_ENABLE;USE_DYNAMIC_ASSET_LOADING;VOTING_ENABLED;NEXT_BOT"
 		$PreprocessorDefinitions		"$BASE;SAXXYMAINMENU_ENABLED" [$SAXXYAWARDS_ENABLE]
 		$PreprocessorDefinitions		"$BASE;WORKSHOP_IMPORT_ENABLED" [$WORKSHOP_IMPORT_ENABLE]
@@ -40,6 +40,11 @@ $Project "Client (Battle Supreme 5)"
 
 	$Folder	"Source Files"
 	{
+		$Folder "HL1"
+		{
+			$File	"hl1\hl1_fx_gibs.cpp"
+		}
+
 		$File	"$SRCDIR\game\shared\basecombatweapon_shared.h"
 		$File	"$SRCDIR\game\client\abuse_report.cpp"
 		$File	"$SRCDIR\game\client\abuse_report.h"

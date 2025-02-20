@@ -1028,6 +1028,31 @@ bool CObjectSentrygun::FindTarget()
 				}
 			}
 		}
+
+		findtargetnpc_t params;
+		params.vecTargetCenter = &vecTargetCenter;
+		params.vecSentryOrigin = &vecSentryOrigin;
+		params.vecSegment = &vecSegment;
+		params.flOldTargetDist = &flOldTargetDist2;
+		params.flMinDist = &flMinDist2;
+		params.pNewEnt = &pTargetCurrent;
+		params.pOldEnt = &pTargetOld;
+
+		if ((pTargetCurrent == NULL))
+		{
+			FindTargetNPC("monster_scientist", &params);
+		}
+	}
+
+	// Check if we are targetting a classic npc and if they are dead.
+	if (pTargetOld != NULL)
+	{
+		if (pTargetOld->IsNPC())
+		{
+			CBaseCombatCharacter* pNPC = dynamic_cast<CBaseCombatCharacter*>(pTargetOld);
+			if (pNPC->GetHealth() <= 0)
+				return false;
+		}
 	}
 
 	// We have a target.
@@ -1144,6 +1169,59 @@ bool CObjectSentrygun::ValidTargetBot( CBaseCombatCharacter *pBot, const Vector 
 		return true;
 
 	return false;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+bool CObjectSentrygun::ValidTargetEntity( CBaseEntity *pEntity, const Vector &vecStart, const Vector &vecEnd )
+{
+	// Not across water boundary.
+	if ( ( GetWaterLevel() == 0 && pEntity->GetWaterLevel() >= 3 ) || ( GetWaterLevel() == 3 && pEntity->GetWaterLevel() <= 0 ) )
+		return false;
+
+	// Ray trace.
+	return FVisible(pEntity, MASK_SHOT | CONTENTS_GRATE );
+}
+
+void CObjectSentrygun::FindTargetNPC(const char* classname, findtargetnpc_t* pTargetNPCParams)
+{
+
+	if (!pTargetNPCParams)
+		return;
+
+	CBaseEntity* pEntity = NULL;
+	while ((pEntity = gEntList.FindEntityByClassname(pEntity, classname)) != NULL)
+	{
+		if (!pEntity)
+			continue;
+
+		CBaseCombatCharacter* pNPC = dynamic_cast<CBaseCombatCharacter*>(pEntity);
+		if (pNPC->GetHealth() <= 0)
+			continue;
+
+		*pTargetNPCParams->vecTargetCenter = pEntity->GetAbsOrigin();
+		*pTargetNPCParams->vecTargetCenter += pEntity->GetViewOffset();
+		VectorSubtract(*pTargetNPCParams->vecTargetCenter, *pTargetNPCParams->vecSentryOrigin, *pTargetNPCParams->vecSegment);
+		float flDist2 = pTargetNPCParams->vecSegment->LengthSqr();
+
+		// Store the current target distance if we come across it
+		if (pEntity == *pTargetNPCParams->pOldEnt)
+		{
+			pTargetNPCParams->flOldTargetDist = &flDist2;
+		}
+
+		// Check to see if the target is closer than the already validated target.
+		if (flDist2 > *pTargetNPCParams->flMinDist)
+			continue;
+
+		// It is closer, check to see if the target is valid.
+		if (ValidTargetEntity(pEntity, *pTargetNPCParams->vecSentryOrigin, *pTargetNPCParams->vecTargetCenter))
+		{
+			pTargetNPCParams->flMinDist = &flDist2;
+			*pTargetNPCParams->pNewEnt = pEntity;
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

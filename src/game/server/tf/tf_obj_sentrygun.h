@@ -25,6 +25,17 @@ enum
 	SENTRY_LEVEL_3,
 };
 
+struct findtargetnpc_t
+{
+	Vector* vecTargetCenter;
+	Vector* vecSentryOrigin;
+	Vector* vecSegment;
+	float* flOldTargetDist;
+	float* flMinDist;
+	CBaseEntity** pNewEnt;
+	CBaseEntity** pOldEnt;
+};
+
 #define SF_SENTRY_UPGRADEABLE	(LAST_SF_BASEOBJ<<1)
 #define SF_SENTRY_INFINITE_AMMO (LAST_SF_BASEOBJ<<2)
 
@@ -134,6 +145,9 @@ private:
 	bool ValidTargetPlayer( CTFPlayer *pPlayer, const Vector &vecStart, const Vector &vecEnd );
 	bool ValidTargetObject( CBaseObject *pObject, const Vector &vecStart, const Vector &vecEnd );
 	bool ValidTargetBot( CBaseCombatCharacter *pBot, const Vector &vecStart, const Vector &vecEnd );
+	bool ValidTargetEntity( CBaseEntity *pEntity, const Vector &vecStart, const Vector &vecEnd );
+
+	void FindTargetNPC(const char* classname, findtargetnpc_t* pTargetNPCParams);
 
 	void FoundTarget( CBaseEntity *pTarget, const Vector &vecSoundCenter, bool bNoSound=false );
 	bool FInViewCone ( CBaseEntity *pEntity );
