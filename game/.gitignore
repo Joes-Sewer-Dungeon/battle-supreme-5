@@ -9,3 +9,6 @@ platform/config/InGameDialogConfig.vdf
 platform/config/ServerBrowser.vdf
 
 steam_appid.txt
+
+# This is the custom hammer gameinfo.
+bs5_hammer/gameinfo.txt
