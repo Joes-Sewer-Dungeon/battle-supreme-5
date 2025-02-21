@@ -466,7 +466,7 @@ void CTFStatPanel::WriteStats( void )
 		const ClassStats_t &stat = m_aClassStats[ i ];
 
 		// strip out any garbage class data
-		if ( ( stat.iPlayerClass > (TF_LAST_NORMAL_CLASS-1) ) || ( stat.iPlayerClass < TF_FIRST_NORMAL_CLASS ) )
+		if ( ( stat.iPlayerClass > TF_LAST_NORMAL_CLASS ) || ( stat.iPlayerClass < TF_FIRST_NORMAL_CLASS ) )
 			continue;
 
 		CDmxElement *pClass = CreateDmxElement( "ClassStats_t" );
@@ -1015,7 +1015,7 @@ float CTFStatPanel::GetTotalHoursPlayed( void )
 {
 	float totalTimePlayed = 0;
 
-	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{		
 		totalTimePlayed += GetClassStats( iClass ).accumulated.m_iStat[ TFSTAT_PLAYTIME ] + GetClassStats( iClass ).accumulatedMVM.m_iStat[ TFSTAT_PLAYTIME ];
 	}

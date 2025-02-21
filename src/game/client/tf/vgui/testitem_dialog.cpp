@@ -54,7 +54,10 @@ static const char *g_pszClassSubdirectories[] =
 	"pyro",			// TF_CLASS_PYRO,
 	"spy",			// TF_CLASS_SPY,
 	"engineer",		// TF_CLASS_ENGINEER,
+	"russell",		// TF_CLASS_RUSSELL,
 };
+
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_pszClassSubdirectories ) == TF_LAST_NORMAL_CLASS + 1 );
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -356,7 +359,7 @@ void CTestItemDialog::CloseAndUpdateItem( void )
 		GameItemDefinition_t *pItemDef = ItemSystem()->GetStaticDataForItemByDefIndex( iItemDef );
 		if ( pItemDef )
 		{
-			for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+			for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 			{
 				if ( m_iClassUsage == 1 || ( m_iClassUsage & (1 << iClass) ) )
 				{

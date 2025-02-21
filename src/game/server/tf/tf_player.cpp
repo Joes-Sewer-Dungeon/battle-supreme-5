@@ -2786,13 +2786,11 @@ void CTFPlayer::PostThink()
 //-----------------------------------------------------------------------------
 void CTFPlayer::PrecacheMvM()
 {
-	for ( int i = TF_FIRST_NORMAL_CLASS; i < TF_LAST_NORMAL_CLASS; ++i )
+	for ( int i = TF_FIRST_NORMAL_CLASS; i <= TF_LAST_NORMAL_CLASS; ++i )
 	{
-		COMPILE_TIME_ASSERT( ARRAYSIZE( g_szBotModels ) == TF_LAST_NORMAL_CLASS );
 		int iModelIndex = PrecacheModel( g_szBotModels[ i ] );
 		PrecacheGibsForModel( iModelIndex );
 
-		COMPILE_TIME_ASSERT( ARRAYSIZE( g_szBotBossModels ) == TF_LAST_NORMAL_CLASS );
 		iModelIndex = PrecacheModel( g_szBotBossModels[ i ] );
 		PrecacheGibsForModel( iModelIndex );
 	}

@@ -454,7 +454,7 @@ CON_COMMAND_F( bot, "Add a bot.", FCVAR_NONE )
 	while ( --count >= 0 )
 	{
 		// What class do they want?
-		int iClass = g_pServerBenchmark->RandomInt( 1, TF_CLASS_COUNT-2 ); // -2 so we skip the Civilian class
+		int iClass = g_pServerBenchmark->RandomInt( TF_FIRST_NORMAL_CLASS, TF_LAST_NORMAL_CLASS );
 		char const *pVal = args.FindArg( "-class" );
 		if ( pVal )
 		{

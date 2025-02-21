@@ -1,0 +1,10 @@
+"Source2Skin"
+{
+    $basetexture        "models/characters/lazlo/lazlo_head"
+    $bumpmap            "models/characters/lazlo/lazlo_head_normal"
+    $diffusewarp        "models/characters/lazlo/gman_skin_diffusewarp"
+    $ambientocclusion   "models/characters/lazlo/lazlo_head_ao"
+
+    // DON'T CRASH!!!
+    $nodecal            1
+}

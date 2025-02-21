@@ -21,7 +21,8 @@ extern bool UseHWMorphModels();
 #define TF_CLASS_PYRO_FILE				"scripts/playerclasses/pyro"
 #define TF_CLASS_SPY_FILE				"scripts/playerclasses/spy"
 #define TF_CLASS_ENGINEER_FILE			"scripts/playerclasses/engineer"
-#define TF_CLASS_CIVILIAN_FILE			"scripts/playerclasses/civilian"
+//#define TF_CLASS_CIVILIAN_FILE		"scripts/playerclasses/civilian"
+#define BS5_CLASS_RUSSELL_FILE			"scripts/playerclasses/russell"
 
 const char *s_aPlayerClassFiles[] =
 {
@@ -35,8 +36,10 @@ const char *s_aPlayerClassFiles[] =
 	TF_CLASS_PYRO_FILE,
 	TF_CLASS_SPY_FILE,
 	TF_CLASS_ENGINEER_FILE,
-	TF_CLASS_CIVILIAN_FILE
+	//TF_CLASS_CIVILIAN_FILE,
+	BS5_CLASS_RUSSELL_FILE
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( s_aPlayerClassFiles ) == TF_LAST_NORMAL_CLASS + 1 );
 
 
 CTFPlayerClassDataMgr s_TFPlayerClassDataMgr;

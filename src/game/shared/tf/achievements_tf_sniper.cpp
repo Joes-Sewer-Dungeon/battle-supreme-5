@@ -1394,7 +1394,7 @@ public:
 					if ( pTFVictim && pTFVictim->GetPlayerClass() )
 					{
 						int iClass = pTFVictim->GetPlayerClass()->GetClassIndex();
-						if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= ( TF_LAST_NORMAL_CLASS - 1 ) ) //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+						if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS )
 						{
 							// yes, the achievement is satisfied for this class, set the corresponding bit
 							int iBitNumber = ( iClass - TF_FIRST_NORMAL_CLASS );

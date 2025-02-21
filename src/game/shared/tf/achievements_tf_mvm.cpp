@@ -223,7 +223,7 @@ public:
 	void Init() 
 	{
 		SetFlags( ACH_SAVE_GLOBAL | ACH_HAS_COMPONENTS );
-		SetGoal( ( TF_LAST_NORMAL_CLASS - 1 ) - TF_FIRST_NORMAL_CLASS + 1 ); //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+		SetGoal( TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS + 1 );
 
 		m_bChangedClass = true;
 	}
@@ -261,7 +261,7 @@ public:
 				if ( pTFPlayer )
 				{
 					int iClass = pTFPlayer->GetPlayerClass()->GetClassIndex();
-					if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= ( TF_LAST_NORMAL_CLASS - 1 ) ) //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+					if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS )
 					{
 						// yes, the achievement is satisfied for this class, set the corresponding bit
 						int iBitNumber =( iClass - TF_FIRST_NORMAL_CLASS );

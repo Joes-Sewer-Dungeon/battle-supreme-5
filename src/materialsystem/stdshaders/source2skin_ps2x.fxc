@@ -1,0 +1,130 @@
+// STATIC: "METALLIC"					"0..1"
+
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"  "0..1"
+// DYNAMIC: "PIXELFOGTYPE"				"0..2"
+// DYNAMIC: "NUM_LIGHTS"				"0..4"
+// DYNAMIC: "WRITE_DEPTH_TO_DESTALPHA"	"0..1"
+
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "shader_constant_register_map.h"
+
+const float3 cAmbientCube[6]		: register( PSREG_AMBIENT_CUBE );
+const float3 g_EyePos				: register( PSREG_EYEPOS_SPEC_EXPONENT );
+const float4 g_FogParams			: register( PSREG_FOG_PARAMS );
+PixelShaderLightInfo cLightInfo[3]	: register( PSREG_LIGHT_INFO_ARRAY );
+
+sampler BaseTextureSampler		: register( s0 );
+sampler NormalMapSampler		: register( s1 );
+sampler DiffuseWarpSampler		: register( s2 );
+sampler AOCurvatureSampler		: register( s3 );
+sampler EnvmapSampler			: register( s4 );
+
+
+struct PS_INPUT
+{
+	float2 baseTexCoord				: TEXCOORD0;
+	float4 lightAtten				: TEXCOORD1;
+	float3x3 tangentSpaceTranspose	: TEXCOORD3;
+	//	     second row				: TEXCOORD4;
+	//	     third row				: TEXCOORD5;
+	float3 worldPos					: TEXCOORD6;
+	float4 projPos_fWrinkleWeight	: TEXCOORD7;
+};
+
+
+float4 main( PS_INPUT i ) : COLOR
+{
+	bool bWriteDepthToAlpha = ( WRITE_DEPTH_TO_DESTALPHA != 0 ) && ( WRITEWATERFOGTODESTALPHA == 0 );
+
+	// Unpacking for convenience
+	float fWrinkleWeight = i.projPos_fWrinkleWeight.w;
+	float3 vProjPos = i.projPos_fWrinkleWeight.xyz;
+	float3 vWorldPos = i.worldPos.xyz;
+
+	float4 baseColor = tex2D( BaseTextureSampler, i.baseTexCoord.xy );
+	float4 normalTex = tex2D( NormalMapSampler, i.baseTexCoord.xy );
+	float4 ambientOcclusion = tex2D( AOCurvatureSampler, i.baseTexCoord.xy );
+
+	float3 vWorldNormal = normalize( mul( i.tangentSpaceTranspose, normalTex.xyz * 2 - 1 ) );
+
+#if METALLIC
+	float3 f0 = lerp( 0.04, baseColor.rgb, baseColor.a );
+	float diffuseFac = 1.0 - baseColor.a;
+#else
+	float3 f0 = 0.04;
+	float diffuseFac = 1.0;
+#endif
+
+	float3 diffuseLight = AmbientLight( vWorldNormal, cAmbientCube );
+	float3 specularLight = 0;
+
+	for ( int l = 0; l < NUM_LIGHTS; l++ )
+	{
+		float3 lightPos;
+		float3 lightColor;
+
+		if ( l < 3 )
+		{
+			lightPos = cLightInfo[l].pos;
+			lightColor = cLightInfo[l].color;
+		}
+		else
+		{
+			lightPos = float3( cLightInfo[1].pos.w, cLightInfo[2].color.w, cLightInfo[2].pos.w );
+			lightColor = float3( cLightInfo[0].color.w, cLightInfo[0].pos.w, cLightInfo[1].color.w );
+		}
+
+		lightColor *= i.lightAtten[l];
+
+		// Relevant directions
+		float3 lightDir = normalize( lightPos - vWorldPos );
+		float3 viewDir = normalize( g_EyePos - vWorldPos );
+		float3 halfDir = normalize( viewDir + lightDir );
+
+		// Relevant dot products
+		float nDotLRaw = dot( vWorldNormal, lightDir );
+		float nDotL = saturate( nDotLRaw );
+		float nDotV = saturate( dot( vWorldNormal, viewDir ) );
+		float nDotH = saturate( dot( vWorldNormal, halfDir ) );
+		float vDotH = saturate( dot( viewDir, halfDir ) );
+
+		// Diffuse term
+		float3 diffuseWarp = tex2D( DiffuseWarpSampler, float2( nDotL * 0.5 + 0.5, pow( ambientOcclusion.w, 2.2 ) ) );
+		diffuseLight += saturate( saturate( nDotL ) + diffuseWarp * 0.5 - 0.25 ) * lightColor;
+
+		// Specular term
+		float3 spec = lightColor;
+
+		// D
+		float a2 = normalTex.a * normalTex.a;
+		float denom = nDotH * nDotH * ( a2 - 1 ) + 1;
+		denom *= denom;
+		spec *= a2 / denom;
+
+		// G
+		float k = pow( normalTex.a + 1, 2 ) / 8;
+		spec *= ( nDotV / ( nDotV * ( 1 - k ) + k ) ) * ( nDotL / ( nDotL * ( 1 - k ) + k ) );
+
+		// F
+		spec *= lerp( f0, 1.0, pow( 1.0 - vDotH, 5 ) );
+
+		specularLight += spec;
+	}
+
+	// Final output color
+	float3 result = baseColor * diffuseLight * diffuseFac + specularLight;
+	result *= ambientOcclusion.y;
+
+	// Fog amount
+	float fogFactor = CalcPixelFogFactor( PIXELFOGTYPE, g_FogParams, g_EyePos.xyz, vWorldPos.xyz, vProjPos.z );
+
+	// Write fog amount to alpha if needed
+#if WRITEWATERFOGTODESTALPHA && ( PIXELFOGTYPE == PIXEL_FOG_TYPE_HEIGHT )
+	float alpha = fogFactor;
+#else
+	float alpha = 1.0f;
+#endif
+
+	return FinalOutput( float4( result, alpha ), fogFactor, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, bWriteDepthToAlpha, vProjPos.z );
+}

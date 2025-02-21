@@ -1000,7 +1000,7 @@ CPasstimeGun::LaunchParams::Default( CTFPlayer *pPlayer )
 }
 
 //-----------------------------------------------------------------------------
-static ConVar *s_pThrowSpeedConvars[TF_LAST_NORMAL_CLASS] = {
+static ConVar *s_pThrowSpeedConvars[TF_LAST_NORMAL_CLASS + 1] = {
 	nullptr, // TF_CLASS_UNDEFINED
 	&tf_passtime_throwspeed_scout,
 	&tf_passtime_throwspeed_sniper,
@@ -1011,10 +1011,12 @@ static ConVar *s_pThrowSpeedConvars[TF_LAST_NORMAL_CLASS] = {
 	&tf_passtime_throwspeed_pyro,
 	&tf_passtime_throwspeed_spy,
 	&tf_passtime_throwspeed_engineer,
+	nullptr,	// BS5FIXME
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( s_pThrowSpeedConvars ) == TF_LAST_NORMAL_CLASS + 1 );
 
 //-----------------------------------------------------------------------------
-static ConVar *s_pThrowArcConvars[TF_LAST_NORMAL_CLASS] = {
+static ConVar *s_pThrowArcConvars[TF_LAST_NORMAL_CLASS + 1] = {
 	nullptr, // TF_CLASS_UNDEFINED
 	&tf_passtime_throwarc_scout,
 	&tf_passtime_throwarc_sniper,
@@ -1025,7 +1027,9 @@ static ConVar *s_pThrowArcConvars[TF_LAST_NORMAL_CLASS] = {
 	&tf_passtime_throwarc_pyro,
 	&tf_passtime_throwarc_spy,
 	&tf_passtime_throwarc_engineer,
+	nullptr,	// BS5FIXME
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( s_pThrowArcConvars ) == TF_LAST_NORMAL_CLASS + 1 );
 
 //-----------------------------------------------------------------------------
 static void GetThrowParams( CTFPlayer *pPlayer, float *speed, float *arc )
@@ -1034,15 +1038,15 @@ static void GetThrowParams( CTFPlayer *pPlayer, float *speed, float *arc )
 	if ( !pPlayer ) return;
 
 	auto iClass = pPlayer->GetPlayerClass()->GetClassIndex();
-	if ( iClass <= TF_CLASS_UNDEFINED || iClass >= TF_LAST_NORMAL_CLASS ) 
+	if ( iClass <= TF_CLASS_UNDEFINED || iClass > TF_LAST_NORMAL_CLASS )
 	{
 		if ( speed ) *speed = 1000.0f;
 		if ( arc ) *arc = 0.3f;
 	}
 	else 
 	{
-		if ( speed ) *speed = s_pThrowSpeedConvars[iClass]->GetFloat();
-		if ( arc ) *arc = s_pThrowArcConvars[iClass]->GetFloat();
+		if ( speed ) *speed = s_pThrowSpeedConvars[iClass] ? s_pThrowSpeedConvars[iClass]->GetFloat() : 1000.0f;
+		if ( arc ) *arc = s_pThrowArcConvars[iClass] ? s_pThrowArcConvars[iClass]->GetFloat() : 1000.0f;
 	}
 }
 

@@ -74,7 +74,7 @@ static bool IsTauntItem( GameItemDefinition_t *pItemDef, const int iTeam, const 
 		{
 			// If we have a scene, use it first
 			const char *pszScene = pAnim->pszScene;
-			if ( pszScene && (iClass >= TF_FIRST_NORMAL_CLASS && iClass < TF_LAST_NORMAL_CLASS) )
+			if ( pszScene && (iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS) )
 			{
 				if ( ppScene )
 				{
@@ -183,6 +183,7 @@ void CTFPlayerModelPanel::ApplySettings( KeyValues *inResourceData )
 			m_customClassData.AddToTail( data );
 		}
 
+		// BS5FIXME
 		Assert( m_customClassData.Count() == TF_LAST_NORMAL_CLASS );
 	}
 

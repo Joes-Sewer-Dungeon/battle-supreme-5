@@ -47,10 +47,11 @@ const char *g_aPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 	"#TF_Class_Name_Pyro",
 	"#TF_Class_Name_Spy",
 	"#TF_Class_Name_Engineer",
-	"#TF_Class_Name_Civilian",
+	"#BS5_Class_Name_Russell",
 	"",
 	"#TF_Random"
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_aPlayerClassNames ) == TF_CLASS_MENU_BUTTONS );
 
 const char *g_aPlayerClassNames_NonLocalized[TF_CLASS_MENU_BUTTONS] =
 {
@@ -64,10 +65,11 @@ const char *g_aPlayerClassNames_NonLocalized[TF_CLASS_MENU_BUTTONS] =
 	"Pyro",
 	"Spy",
 	"Engineer",
-	"Civilian",
+	"Russell",
 	"",
 	"Random"
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_aPlayerClassNames_NonLocalized ) == TF_CLASS_MENU_BUTTONS );
 
 const char *g_aRawPlayerClassNamesShort[TF_CLASS_MENU_BUTTONS] =
 {
@@ -81,10 +83,11 @@ const char *g_aRawPlayerClassNamesShort[TF_CLASS_MENU_BUTTONS] =
 	"pyro",
 	"spy",
 	"engineer",
-	"civilian",
+	"russell",
 	"",
 	"random"
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_aRawPlayerClassNamesShort ) == TF_CLASS_RANDOM + 1 );
 
 const char *g_aRawPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 {
@@ -98,10 +101,11 @@ const char *g_aRawPlayerClassNames[TF_CLASS_MENU_BUTTONS] =
 	"pyro",
 	"spy",
 	"engineer",
-	"civilian",
+	"russell",
 	"",
 	"random"
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_aRawPlayerClassNames ) == TF_CLASS_RANDOM + 1 );
 
 const char g_szBotModels[][ MAX_PATH ] = 
 {
@@ -116,7 +120,10 @@ const char g_szBotModels[][ MAX_PATH ] =
 	"models/bots/pyro/bot_pyro.mdl",
 	"models/bots/spy/bot_spy.mdl",
 	"models/bots/engineer/bot_engineer.mdl",
+	
+	"models/bots/engineer/bot_engineer.mdl",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_szBotModels ) == TF_LAST_NORMAL_CLASS + 1 );
 
 const char g_szPlayerRobotModels[][MAX_PATH] =
 {
@@ -131,7 +138,10 @@ const char g_szPlayerRobotModels[][MAX_PATH] =
 	"models/bots/pyro/bot_pyro_human_anim.mdl",
 	"models/bots/spy/bot_spy_human_anims.mdl",
 	"models/bots/engineer/bot_engineer_human_anim.mdl",
+
+	"models/bots/engineer/bot_engineer_human_anim.mdl",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_szPlayerRobotModels ) == TF_LAST_NORMAL_CLASS + 1 );
 
 const char g_szBotBossModels[][ MAX_PATH ] = 
 {
@@ -146,7 +156,10 @@ const char g_szBotBossModels[][ MAX_PATH ] =
 	"models/bots/pyro_boss/bot_pyro_boss.mdl",
 	"models/bots/spy/bot_spy.mdl",
 	"models/bots/engineer/bot_engineer.mdl",
+	
+	"models/bots/engineer/bot_engineer.mdl",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_szBotBossModels ) == TF_LAST_NORMAL_CLASS + 1 );
 
 const char g_szBotBossSentryBusterModel[ MAX_PATH ] = "models/bots/demo/bot_sentry_buster.mdl";
 
@@ -164,7 +177,10 @@ const char g_szRomePromoItems_Hat[][ MAX_PATH ] =
 	"tw_pyrobot_helmet",
 	"tw_spybot_hood",
 	"tw_engineerbot_helmet",
+
+	"tw_engineerbot_helmet",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_szRomePromoItems_Hat ) == TF_LAST_NORMAL_CLASS + 1 );
 
 const char g_szRomePromoItems_Misc[][ MAX_PATH ] = 
 {
@@ -179,7 +195,10 @@ const char g_szRomePromoItems_Misc[][ MAX_PATH ] =
 	"tw_pyrobot_armor",
 	"tw_spybot_armor",
 	"tw_engineerbot_armor",
+
+	"tw_engineerbot_armor",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_szRomePromoItems_Misc ) == TF_LAST_NORMAL_CLASS + 1 );
 
 const char *g_pszBreadModels[] = 
 {
@@ -192,7 +211,10 @@ const char *g_pszBreadModels[] =
 	"models/weapons/c_models/c_bread/c_bread_pretzel.mdl",		// Medic
 	"models/weapons/c_models/c_bread/c_bread_ration.mdl",		// Soldier
 	"models/weapons/c_models/c_bread/c_bread_russianblack.mdl",	// Heavy?
+
+	"models/weapons/c_models/c_bread/c_bread_russianblack.mdl",	// Russell
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_pszBreadModels ) == TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS + 1 );
 
 int GetClassIndexFromString( const char *pClassName, int nLastClassIndex/*=TF_LAST_NORMAL_CLASS*/ )
 {
@@ -225,7 +247,7 @@ int iRemapIndexToClass[TF_CLASS_MENU_BUTTONS] =
 		TF_CLASS_MEDIC,
 		TF_CLASS_SNIPER,
 		TF_CLASS_SPY,
-		0,
+		BS5_CLASS_RUSSELL,
 		0,
 		TF_CLASS_RANDOM
 };
@@ -1909,6 +1931,8 @@ const char *g_pszItemClassImagesRed[] =
 	"class_portraits/pyro",			// TF_CLASS_PYRO,
 	"class_portraits/spy",			// TF_CLASS_SPY,
 	"class_portraits/engineer",		// TF_CLASS_ENGINEER,
+	"class_portraits/russell",		// BS5_CLASS_RUSSELL,
+
 	"class_portraits/scout_grey",		// TF_CLASS_SCOUT,			
 	"class_portraits/sniper_grey",		// TF_CLASS_SNIPER,
 	"class_portraits/soldier_grey",		// TF_CLASS_SOLDIER,
@@ -1918,7 +1942,9 @@ const char *g_pszItemClassImagesRed[] =
 	"class_portraits/pyro_grey",		// TF_CLASS_PYRO,
 	"class_portraits/spy_grey",			// TF_CLASS_SPY,
 	"class_portraits/engineer_grey",	// TF_CLASS_ENGINEER,
+	"class_portraits/russell_grey",		// BS5_CLASS_RUSSELL,
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_pszItemClassImagesRed ) == TF_LAST_NORMAL_CLASS * 2 + 1 );
 
 const char *g_pszItemClassImagesBlue[] =
 {
@@ -1932,6 +1958,8 @@ const char *g_pszItemClassImagesBlue[] =
 	"class_portraits/pyro_blue",		// TF_CLASS_PYRO,
 	"class_portraits/spy_blue",			// TF_CLASS_SPY,
 	"class_portraits/engineer_blue",	// TF_CLASS_ENGINEER,
+	"class_portraits/russell_blue",		// BS5_CLASS_RUSSELL,
+
 	"class_portraits/scout_blue_grey",		// TF_CLASS_SCOUT,			
 	"class_portraits/sniper_blue_grey",		// TF_CLASS_SNIPER,
 	"class_portraits/soldier_blue_grey",	// TF_CLASS_SOLDIER,
@@ -1941,7 +1969,9 @@ const char *g_pszItemClassImagesBlue[] =
 	"class_portraits/pyro_blue_grey",		// TF_CLASS_PYRO,
 	"class_portraits/spy_blue_grey",		// TF_CLASS_SPY,
 	"class_portraits/engineer_blue_grey",	// TF_CLASS_ENGINEER,
+	"class_portraits/russell_blue_grey",		// BS5_CLASS_RUSSELL,
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_pszItemClassImagesBlue ) == TF_LAST_NORMAL_CLASS * 2 + 1 );
 
 const char *g_pszCompetitiveMedalImages[] =
 {

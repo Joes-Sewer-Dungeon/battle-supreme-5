@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+    $basetexture    "models/characters/lazlo/lazlo_haircards"
+    $translucent    1
+    $nocull         1
+    $nodecal        1
+}

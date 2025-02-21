@@ -1387,7 +1387,7 @@ void CMannVsMachineStats::SW_ReportClientWaveSummary( uint16 waveID, CMannVsMach
 //	int iClass = pTFPlayer->GetPlayerClass()->GetClassIndex();
 //
 //	// Invalid Class, Spectators?
-//	if ( iClass < TF_FIRST_NORMAL_CLASS || iClass >= TF_LAST_NORMAL_CLASS )
+//	if ( iClass < TF_FIRST_NORMAL_CLASS || iClass > TF_LAST_NORMAL_CLASS )
 //		return;
 //
 //	// Create and Send the report

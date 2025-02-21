@@ -466,7 +466,7 @@ void CObjectTeleporter::Precache()
 	PrecacheGibsForModel( iModelIndex );
 
 	// Bread models
-	int nRange = TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS;
+	int nRange = TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS + 1;
 	for( int i = 0; i < nRange; ++i )
 	{
 		if ( g_pszBreadModels[i] && *g_pszBreadModels[i] )
@@ -1456,7 +1456,7 @@ void CObjectTeleporter::SpawnBread( const CTFPlayer* pTeleportingPlayer )
 	if( !pTeleportingPlayer )
 		return;
 
-	const char* pszModelName = g_pszBreadModels[ RandomInt( 0, TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS - 1 ) ];
+	const char* pszModelName = g_pszBreadModels[ RandomInt( 0, TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS ) ];
 	CPhysicsProp *pProp = NULL;
 
 	MDLHandle_t h = mdlcache->FindMDL( pszModelName );

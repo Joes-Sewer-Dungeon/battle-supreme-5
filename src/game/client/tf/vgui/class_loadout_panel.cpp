@@ -190,9 +190,11 @@ const LoadoutPanelPositioningInstance *g_VisibleLoadoutSlotsPerClass[] =
 	&g_DefaultLoadoutPanelPositioning,			// TF_CLASS_PYRO
 	&g_LoadoutPanelPositioning_Spy,				// TF_CLASS_SPY
 	&g_LoadoutPanelPositioning_Engineer,		// TF_CLASS_ENGINEER
+	//&g_DefaultLoadoutPanelPositioning,			// TF_CLASS_CIVILIAN
+	&g_DefaultLoadoutPanelPositioning,			// TF_CLASS_RUSSELL
 };
 
-COMPILE_TIME_ASSERT( ARRAYSIZE( g_VisibleLoadoutSlotsPerClass ) == TF_LAST_NORMAL_CLASS );
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_VisibleLoadoutSlotsPerClass ) == TF_LAST_NORMAL_CLASS + 1 );
 
 //-----------------------------------------------------------------------------
 // Particle Effect Slider

@@ -35,7 +35,7 @@
 extern ConVar tf_respawn_on_loadoutchanges;
 
 extern const char *g_szEquipSlotHeader[CLASS_LOADOUT_POSITION_COUNT];
-int g_SlotsToLoadoutSlotsPerClass[TF_LAST_NORMAL_CLASS][MAX_QUICKSWITCH_SLOTS] =
+int g_SlotsToLoadoutSlotsPerClass[TF_LAST_NORMAL_CLASS + 1][MAX_QUICKSWITCH_SLOTS] =
 {
 	//TF_CLASS_UNDEFINED = 0,
 	{ 
@@ -186,6 +186,21 @@ int g_SlotsToLoadoutSlotsPerClass[TF_LAST_NORMAL_CLASS][MAX_QUICKSWITCH_SLOTS] =
 		LOADOUT_POSITION_INVALID, 
 		LOADOUT_POSITION_INVALID,
 	},
+
+	//TF_CLASS_RUSSELL = 0,
+	{
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+		LOADOUT_POSITION_INVALID,
+	},
 };
 
 DECLARE_HUDELEMENT( CItemQuickSwitchPanel );
@@ -265,7 +280,7 @@ CItemQuickSwitchPanel::~CItemQuickSwitchPanel()
 //-----------------------------------------------------------------------------
 bool CItemQuickSwitchPanel::IsValid( void )
 { 
-	return ( m_iClass >= TF_FIRST_NORMAL_CLASS && m_iClass < TF_LAST_NORMAL_CLASS ) && 
+	return ( m_iClass >= TF_FIRST_NORMAL_CLASS && m_iClass <= TF_LAST_NORMAL_CLASS ) && 
 		   ( m_iSlot > LOADOUT_POSITION_INVALID && m_iSlot < CLASS_LOADOUT_POSITION_COUNT ); 
 }
 
@@ -338,7 +353,7 @@ bool CItemQuickSwitchPanel::CalculateClassAndSlot( void )
 
 	// Get the current class
 	m_iClass = pPlayer->GetPlayerClass()->GetClassIndex();
-	if ( m_iClass < TF_FIRST_NORMAL_CLASS || m_iClass >= TF_LAST_NORMAL_CLASS )
+	if ( m_iClass < TF_FIRST_NORMAL_CLASS || m_iClass > TF_LAST_NORMAL_CLASS )
 		return false;
 
 	if ( m_pLoadoutPresetPanel )

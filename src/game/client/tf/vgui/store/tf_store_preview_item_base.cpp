@@ -330,7 +330,7 @@ void CTFStorePreviewItemPanelBase::OnCommand( const char *command )
 void CTFStorePreviewItemPanelBase::OnClassIconSelected( KeyValues *data )
 {
 	int iClass = data->GetInt( "class", 0 );
-	if ( iClass < TF_FIRST_NORMAL_CLASS || iClass >= TF_LAST_NORMAL_CLASS )
+	if ( iClass < TF_FIRST_NORMAL_CLASS || iClass > TF_LAST_NORMAL_CLASS )
 	{
 		iClass = TF_CLASS_SCOUT;
 	}
@@ -476,13 +476,13 @@ void CTFStorePreviewItemPanelBase::UpdateIcons( void )
 		{
 			int iButton = 0;
 			int iMaxButtons = m_pClassIcons.Count();
-			int iNumClasses = (TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS);
+			int iNumClasses = (TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS) + 1;
 			// we show one less class icon when the item is visible
 			if ( iMaxButtons < iNumClasses && m_iCurrentIconPosition == 0 )
 			{
 				iMaxButtons -= 1;
 			}
-			for ( int iClass = TF_FIRST_NORMAL_CLASS + m_iCurrentIconPosition; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+			for ( int iClass = TF_FIRST_NORMAL_CLASS + m_iCurrentIconPosition; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 			{
 				if ( !pItemData->CanBeUsedByClass(iClass) )
 					continue;
@@ -870,7 +870,7 @@ void CTFStorePreviewItemPanelBase::OnShowClassIconMouseover( KeyValues *data )
 
 		// Set the text to the correct string
 		int iClass = data->GetInt( "class", 0 );
-		if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass < TF_LAST_NORMAL_CLASS )
+		if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS )
 		{
 			wchar_t wzLocalized[256];
 			const char *pszLocString = bIsABundle ? "#Store_ClassImageMouseoverBundle" : "#Store_ClassImageMouseover";

@@ -53,7 +53,7 @@ public:
 		m_nPvpKills = 0;
 	}
 
-	int m_arrClassDamage[ TF_LAST_NORMAL_CLASS ];
+	int m_arrClassDamage[ TF_LAST_NORMAL_CLASS + 1 ];
 	float m_flPropHuntTime1;
 	float m_flPropHuntTime2;
 	float m_flLifeTime;

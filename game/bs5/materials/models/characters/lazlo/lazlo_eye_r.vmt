@@ -1,0 +1,10 @@
+"EyeRefract"
+{
+	"$iris"		"models/characters/lazlo/lazlo_eye_iris"
+
+	"$AmbientOcclTexture"	"Engine/eye-extra"
+	"$Envmap"            	"Engine/eye-reflection-cubemap-"
+	"$CorneaTexture"     	"Engine/eye-cornea"
+
+	"$EyeballRadius" 		"0.58629462"
+}

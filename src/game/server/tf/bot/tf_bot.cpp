@@ -295,7 +295,7 @@ void CreateBotName( int iTeam, int iClassIndex, CTFBot::DifficultyType skill, ch
 
 		// get the class name
 		wchar_t *pLocalizedName = NULL;
-		if ( iClassIndex >= TF_FIRST_NORMAL_CLASS && iClassIndex < TF_LAST_NORMAL_CLASS )
+		if ( iClassIndex >= TF_FIRST_NORMAL_CLASS && iClassIndex <= TF_LAST_NORMAL_CLASS )
 		{
 			pLocalizedName = g_pVGuiLocalize->Find( g_aPlayerClassNames[ iClassIndex ] );
 		}
@@ -779,7 +779,7 @@ public:
 		m_myTeam = teamID;
 		m_teamSize = 0;
 		
-		for( int i=0; i<TF_LAST_NORMAL_CLASS; ++i )
+		for( int i=0; i<=TF_LAST_NORMAL_CLASS; ++i )
 			m_count[i] = 0;
 	}
 
@@ -1128,9 +1128,9 @@ ETFClass CTFBot::GetPresetClassToSpawn() const
 	CCountClassMembers currentRoster( this, GetTeamNumber() );
 	ForEachPlayer( currentRoster );
 
-	int classCount[TF_LAST_NORMAL_CLASS];
+	int classCount[TF_LAST_NORMAL_CLASS + 1];
 	V_memset( classCount, 0, sizeof( classCount ) );
-	for ( int i=0; i<12; ++i )
+	for ( int i=0; i <= TF_LAST_NORMAL_CLASS; ++i )
 	{
 		ETFClass iClass = desiredRoster[i];
 
@@ -4413,7 +4413,7 @@ void CTFBot::DisguiseAsMemberOfEnemyTeam( void )
 	CUtlVector< CTFPlayer * > enemyVector;
 	CollectPlayers( &enemyVector, GetEnemyTeam( GetTeamNumber() ) );
 
-	int disguise = RandomInt( TF_FIRST_NORMAL_CLASS, TF_LAST_NORMAL_CLASS-1 );
+	int disguise = RandomInt( TF_FIRST_NORMAL_CLASS, TF_LAST_NORMAL_CLASS );
 
 	if ( enemyVector.Count() > 0 )
 	{

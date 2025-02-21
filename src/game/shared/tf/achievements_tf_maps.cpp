@@ -626,7 +626,7 @@ class CAchievementTFDoomsday_PlayEachClass : public CBaseTFAchievementSimple
 	void Init() 
 	{
 		SetFlags( ACH_SAVE_GLOBAL | ACH_HAS_COMPONENTS );
-		SetGoal( ( TF_LAST_NORMAL_CLASS - 1 ) - TF_FIRST_NORMAL_CLASS + 1 ); //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+		SetGoal( TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS + 1 );
 		SetMapNameFilter( "sd_doomsday" );
 	}
 
@@ -651,7 +651,7 @@ class CAchievementTFDoomsday_PlayEachClass : public CBaseTFAchievementSimple
 					if ( pTFPlayer )
 					{
 						int iClass = pTFPlayer->GetPlayerClass()->GetClassIndex();
-						if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= ( TF_LAST_NORMAL_CLASS - 1 ) ) //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+						if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS - 1 )
 						{
 							// yes, the achievement is satisfied for this class, set the corresponding bit	    
 							int iBitNumber = ( iClass - TF_FIRST_NORMAL_CLASS );

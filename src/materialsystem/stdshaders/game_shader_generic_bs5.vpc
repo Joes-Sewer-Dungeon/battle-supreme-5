@@ -15,13 +15,20 @@ $Project "Game Shaders (Battle Supreme 5)"
     {
         -$File	"example_model_dx9.cpp"
 		-$File	"example_model_dx9_helper.cpp"
-
 		-$File	"sdk_bloom.cpp"
 		-$File	"sdk_screenspace_general.cpp"
+
+        $File	"source2skin_dx9.cpp"
+		$File	"source2skin_dx9_helper.cpp"
     }
 
     $Folder "Header Files"
     {
         -$File	"example_model_dx9_helper.h"
+
+        $File	"source2skin_dx9_helper.h"
     }
+
+    $Shaders	"bs5shaders_dx9_20b.txt"
+	$Shaders	"bs5shaders_dx9_30.txt"
 }

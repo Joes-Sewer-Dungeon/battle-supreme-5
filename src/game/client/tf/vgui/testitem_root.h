@@ -92,7 +92,7 @@ private:
 	CExButton				*m_pItemTestButtons[TI_TYPE_COUNT];
 	CExButton				*m_pItemRemoveButtons[TI_TYPE_COUNT];
 	CExLabel				*m_pItemTestLabels[TI_TYPE_COUNT];
-	vgui::CheckButton		*m_pClassCheckButtons[TF_LAST_NORMAL_CLASS];
+	vgui::CheckButton		*m_pClassCheckButtons[TF_LAST_NORMAL_CLASS + 1];
 	KeyValues				*m_pItemTestKVs[TI_TYPE_COUNT];
 
 	// Bot addition panel

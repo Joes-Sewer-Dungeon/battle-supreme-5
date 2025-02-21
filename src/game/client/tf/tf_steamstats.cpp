@@ -83,7 +83,9 @@ StatMap_t* g_SteamStats_Class[] = {
 	g_SteamStats_Pyro,		// Pyro
 	g_SteamStats_Spy,		// Spy
 	g_SteamStats_Engineer,	// Engineer
+	NULL,
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_SteamStats_Class ) == TF_LAST_NORMAL_CLASS + 1 );
 
 // subset of map stats which we store in Steam
 StatMap_t g_SteamMapStats[] = {
@@ -142,7 +144,7 @@ void CTFSteamStats::FireGameEvent( IGameEvent *event )
 		CTFStatPanel *pStatPanel = GET_HUDELEMENT( CTFStatPanel );
 		Assert( pStatPanel );
 
-		for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+		for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 		{
 			// Grab generic stats:
 			ClassStats_t &classStats = CTFStatPanel::GetClassStats( iClass );
@@ -265,7 +267,7 @@ void CTFSteamStats::UploadStats()
 		return;
 
 	// Stomp local steam context stats with those in the stat panel.
-	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{
 		// Set generic stats:
 		ClassStats_t &classStats = CTFStatPanel::GetClassStats( iClass );

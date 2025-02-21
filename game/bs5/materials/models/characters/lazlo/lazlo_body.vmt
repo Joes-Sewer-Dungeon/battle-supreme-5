@@ -1,0 +1,8 @@
+"Source2Skin"   // TODO: Separate complex shader??
+{
+    $basetexture        "models/characters/lazlo/lazlo_body"
+    $bumpmap            "models/characters/lazlo/lazlo_body_normal"
+    $diffusewarp        "models/characters/lazlo/blank_diffusewarp"
+    $ambientocclusion   "models/characters/lazlo/lazlo_body_ao"
+    $metallic           1
+}

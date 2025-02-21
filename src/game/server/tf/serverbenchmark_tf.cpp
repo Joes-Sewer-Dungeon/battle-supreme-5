@@ -212,7 +212,7 @@ public:
 		if ( m_nBotsCreated == 0 )
 			iTeam = TF_TEAM_BLUE;
 
-		int iClass = g_pServerBenchmark->RandomInt( TF_FIRST_NORMAL_CLASS, ( TF_LAST_NORMAL_CLASS - 1 ) ); //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+		int iClass = g_pServerBenchmark->RandomInt( TF_FIRST_NORMAL_CLASS, TF_LAST_NORMAL_CLASS );
 		if ( m_nBotsCreated < 4 )
 			iClass = TF_CLASS_ENGINEER; // Make engineers first so they'll build sentries.
 

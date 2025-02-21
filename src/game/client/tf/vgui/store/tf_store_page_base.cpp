@@ -30,8 +30,11 @@ const char *g_szClassFilterStrings[] =
 	"#Store_Items_HWGuy",
 	"#Store_Items_Pyro",
 	"#Store_Items_Spy",
-	"#Store_Items_Engineer"
+	"#Store_Items_Engineer",
+	"#Store_Items_Russell"
 };
+
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_szClassFilterStrings ) == TF_LAST_NORMAL_CLASS + 1 );
 
 DECLARE_BUILD_FACTORY( CStorePreviewClassIcon );
 
@@ -120,7 +123,7 @@ void CTFStorePageBase::GetFiltersForDef( GameItemDefinition_t *pDef, CUtlVector<
 	if ( pDef->CanBeUsedByAllClasses() )
 		pVecFilters->AddToTail( FILTER_ALLCLASS_ITEMS );
 
-	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{
 		if ( pDef->CanBeUsedByClass( iClass ) )
 			pVecFilters->AddToTail( iClass );
@@ -149,7 +152,7 @@ void CTFStorePageBase::OnItemDetails( vgui::Panel *panel )
 //-----------------------------------------------------------------------------
 void CTFStorePageBase::ShowPreview( int iClass, const econ_store_entry_t* pEntry )
 {
-	if ( iClass < TF_FIRST_NORMAL_CLASS || iClass >= TF_LAST_NORMAL_CLASS )
+	if ( iClass < TF_FIRST_NORMAL_CLASS || iClass > TF_LAST_NORMAL_CLASS )
 	{
 		iClass = TF_CLASS_SCOUT;
 	}
@@ -188,7 +191,7 @@ void CTFStorePageBase::UpdateFilterComboBox( void )
 	}
 
 	// Individual classes
-	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{
 		nCount = m_pPrimaryFilter->GetCountForFilterItem( iClass );
 		if ( !nCount )
@@ -224,7 +227,7 @@ void CTFStorePageBase::UpdateFilterComboBox( void )
 	}
 
 	// Individual classes
-	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass < TF_LAST_NORMAL_CLASS; iClass++ )
+	for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 	{
 		if ( m_vecFilterCounts[iClass] == 0 )
 			continue;

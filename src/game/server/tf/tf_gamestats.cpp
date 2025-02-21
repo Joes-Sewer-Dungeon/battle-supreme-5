@@ -55,8 +55,10 @@ const char *g_aClassNames[] =
 	"TF_CLASS_PYRO",
 	"TF_CLASS_SPY",
 	"TF_CLASS_ENGINEER",
-	"TF_CLASS_CIVILIAN",
+	//"TF_CLASS_CIVILIAN",
+	"TF_CLASS_RUSSELL",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_aClassNames ) == TF_LAST_NORMAL_CLASS + 1 );
 
 //-----------------------------------------------------------------------------
 // Purpose: Constructor
@@ -2872,7 +2874,7 @@ void CTFGameStats::Event_PlayerLoadoutChanged( CTFPlayer *pPlayer, bool bForceRe
 	pKVData->SetInt( "Class", iPrevClass );
 	pKVData->SetInt( "AccountIDPlayer", (int)steamIDForPlayer.ConvertToUint64() );	// OGS does not actually support uints
 
-	if ( iPrevClass < TF_FIRST_NORMAL_CLASS || iPrevClass >= TF_LAST_NORMAL_CLASS )
+	if ( iPrevClass < TF_FIRST_NORMAL_CLASS || iPrevClass > TF_LAST_NORMAL_CLASS )
 	{
 		bIsInit = false;
 	}

@@ -681,7 +681,7 @@ void CTFClassMenu::ShowPanel( bool bShow )
 	}
 }
 
-const char *g_pszLegacyClassSelectVCDWeapons[TF_LAST_NORMAL_CLASS] =
+const char *g_pszLegacyClassSelectVCDWeapons[] =
 {
 	"",										// TF_CLASS_UNDEFINED = 0,
 	"",										// TF_CLASS_SCOUT,				// weapons handled individually
@@ -693,9 +693,11 @@ const char *g_pszLegacyClassSelectVCDWeapons[TF_LAST_NORMAL_CLASS] =
 	"tf_weapon_flamethrower",				// TF_CLASS_PYRO,
 	"",										// TF_CLASS_SPY,				// weapons handled individually
 	"tf_weapon_wrench",						// TF_CLASS_ENGINEER,		
+	"",
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_pszLegacyClassSelectVCDWeapons ) == TF_LAST_NORMAL_CLASS + 1 );
 
-int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
+int g_iLegacyClassSelectWeaponSlots[] =
 {
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_UNDEFINED = 0,
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_SCOUT,			// TF_FIRST_NORMAL_CLASS
@@ -707,7 +709,9 @@ int g_iLegacyClassSelectWeaponSlots[TF_LAST_NORMAL_CLASS] =
 	LOADOUT_POSITION_PRIMARY,		// TF_CLASS_PYRO,
 	LOADOUT_POSITION_MELEE,			// TF_CLASS_SPY,
 	LOADOUT_POSITION_MELEE,			// TF_CLASS_ENGINEER,		
+	LOADOUT_POSITION_MELEE,
 };
+COMPILE_TIME_ASSERT( ARRAYSIZE( g_iLegacyClassSelectWeaponSlots ) == TF_LAST_NORMAL_CLASS + 1 );
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -1353,7 +1357,9 @@ static const char *g_sDialogVariables[] = {
 	"numMedic",
 	"numSniper",
 	"numSpy",
-	"",
+	//"",
+
+	"numRussell",
 };
 
 static const char *g_sClassImagesBlue[] = {
@@ -1370,7 +1376,9 @@ static const char *g_sClassImagesBlue[] = {
 	"class_sel_sm_sniper_blu",
 	"class_sel_sm_spy_blu",
 
-	"class_sel_sm_scout_blu",
+	//"class_sel_sm_scout_blu",
+
+	"class_sel_sm_russell_blu",
 };
 
 static const char *g_sClassImagesRed[] = {
@@ -1387,7 +1395,9 @@ static const char *g_sClassImagesRed[] = {
 	"class_sel_sm_sniper_red",
 	"class_sel_sm_spy_red",
 
-	"class_sel_sm_scout_red",
+	//"class_sel_sm_scout_red",
+
+	"class_sel_sm_russell_red",
 };
 
 int g_ClassDefinesRemap[] = {
@@ -1403,7 +1413,9 @@ int g_ClassDefinesRemap[] = {
 	TF_CLASS_MEDIC,
 	TF_CLASS_SNIPER,
 	TF_CLASS_SPY,
-	TF_CLASS_CIVILIAN,
+	//TF_CLASS_CIVILIAN,
+	
+	BS5_CLASS_RUSSELL,
 };
 
 void CTFClassMenu::UpdateNumClassLabels( int iTeam )

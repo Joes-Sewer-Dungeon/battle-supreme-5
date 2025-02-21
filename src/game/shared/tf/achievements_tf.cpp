@@ -154,7 +154,7 @@ class CAchievementTFPlayGameEveryClass : public CTFAchievementFullRound
 	void Init() 
 	{
 		SetFlags( ACH_SAVE_GLOBAL | ACH_HAS_COMPONENTS | ACH_FILTER_FULL_ROUND_ONLY );
-		SetGoal( ( TF_LAST_NORMAL_CLASS - 1 ) - TF_FIRST_NORMAL_CLASS + 1 ); //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+		SetGoal( TF_LAST_NORMAL_CLASS - TF_FIRST_NORMAL_CLASS + 1 );
 		BaseClass::Init();
 	}
 
@@ -170,7 +170,7 @@ class CAchievementTFPlayGameEveryClass : public CTFAchievementFullRound
 				if ( pTFPlayer )
 				{
 					int iClass = pTFPlayer->GetPlayerClass()->GetClassIndex();
-					if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= ( TF_LAST_NORMAL_CLASS - 1 ) ) //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+					if ( iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS )
 					{
 						// yes, the achievement is satisfied for this class, set the corresponding bit
 						int iBitNumber =( iClass - TF_FIRST_NORMAL_CLASS );
@@ -447,7 +447,7 @@ class CAchievementTFGetMultipleKills : public CBaseTFAchievementSimple
 
 		int iKills = 0;
 		// get sum of kills per class across all classes to get total kills
-		for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= ( TF_LAST_NORMAL_CLASS - 1 ); iClass++ ) //( TF_LAST_NORMAL_CLASS - 1 ) to exclude the new civilian class
+		for ( int iClass = TF_FIRST_NORMAL_CLASS; iClass <= TF_LAST_NORMAL_CLASS; iClass++ )
 		{
 			ClassStats_t &classStats = CTFStatPanel::GetClassStats( iClass );
 			iKills += classStats.accumulated.m_iStat[TFSTAT_KILLS];

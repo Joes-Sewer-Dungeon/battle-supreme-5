@@ -196,7 +196,7 @@ enum
 #define TF_CLASS_COUNT			( TF_CLASS_COUNT_ALL )
 
 #define TF_FIRST_NORMAL_CLASS	( TF_CLASS_UNDEFINED + 1 )
-#define TF_LAST_NORMAL_CLASS	( TF_CLASS_CIVILIAN )
+#define TF_LAST_NORMAL_CLASS	( BS5_CLASS_RUSSELL )
 
 #define	TF_CLASS_MENU_BUTTONS	( TF_CLASS_RANDOM + 1 )
 
@@ -215,30 +215,32 @@ enum ETFClass
 	TF_CLASS_ENGINEER,		
 
 	// Add any new classes after Engineer
-	TF_CLASS_CIVILIAN,		// TF_LAST_NORMAL_CLASS
+	//TF_CLASS_CIVILIAN,		// TF_LAST_NORMAL_CLASS
+	BS5_CLASS_RUSSELL,
+
 	TF_CLASS_COUNT_ALL,
 
 	TF_CLASS_RANDOM
 };
 
-inline bool IsValidTFPlayerClass( int iClass ) { return iClass >= TF_FIRST_NORMAL_CLASS && iClass < TF_LAST_NORMAL_CLASS; }
+inline bool IsValidTFPlayerClass( int iClass ) { return iClass >= TF_FIRST_NORMAL_CLASS && iClass <= TF_LAST_NORMAL_CLASS; }
 inline bool IsValidTFTeam( int iTeam ) { return iTeam == TF_TEAM_RED || iTeam == TF_TEAM_BLUE; }
 
-#define FOR_EACH_NORMAL_PLAYER_CLASS( _i ) for ( int _i = TF_FIRST_NORMAL_CLASS; _i < TF_LAST_NORMAL_CLASS; _i++ )
+#define FOR_EACH_NORMAL_PLAYER_CLASS( _i ) for ( int _i = TF_FIRST_NORMAL_CLASS; _i <= TF_LAST_NORMAL_CLASS; _i++ )
 
 extern const char *g_aPlayerClassNames[TF_CLASS_MENU_BUTTONS];				// localization keys
 extern const char *g_aPlayerClassNames_NonLocalized[TF_CLASS_MENU_BUTTONS];	// non-localized class names
 extern const char *g_aRawPlayerClassNamesShort[TF_CLASS_MENU_BUTTONS];		// raw class names, useful for formatting resource/material filenames - "heavy" instead of "heavyweapons" and "demo" instead of "demoman"
 extern const char *g_aRawPlayerClassNames[TF_CLASS_MENU_BUTTONS];			// raw class names, useful for formatting resource/material filenames
 
-extern const char g_szPlayerRobotModels[TF_LAST_NORMAL_CLASS][ MAX_PATH ];
+extern const char g_szPlayerRobotModels[/*TF_LAST_NORMAL_CLASS + 1*/][MAX_PATH];
 
-extern const char g_szBotModels[TF_LAST_NORMAL_CLASS][ MAX_PATH ];
-extern const char g_szBotBossModels[TF_LAST_NORMAL_CLASS][ MAX_PATH ];
+extern const char g_szBotModels[/*TF_LAST_NORMAL_CLASS + 1*/][MAX_PATH];
+extern const char g_szBotBossModels[/*TF_LAST_NORMAL_CLASS + 1*/][MAX_PATH];
 extern const char g_szBotBossSentryBusterModel[ MAX_PATH ];
 
-extern const char g_szRomePromoItems_Hat[TF_LAST_NORMAL_CLASS][ MAX_PATH ];
-extern const char g_szRomePromoItems_Misc[TF_LAST_NORMAL_CLASS][ MAX_PATH ];
+extern const char g_szRomePromoItems_Hat[/*TF_LAST_NORMAL_CLASS + 1*/][MAX_PATH];
+extern const char g_szRomePromoItems_Misc[/*TF_LAST_NORMAL_CLASS + 1*/][ MAX_PATH ];
 
 int GetClassIndexFromString( const char *pClassName, int nLastClassIndex = TF_LAST_NORMAL_CLASS );
 

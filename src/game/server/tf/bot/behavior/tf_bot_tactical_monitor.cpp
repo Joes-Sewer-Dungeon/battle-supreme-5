@@ -441,7 +441,7 @@ EventDesiredResult< CTFBot > CTFBotTacticalMonitor::OnCommandString( CTFBot *me,
 		{
 			if ( me->CanDisguise() )
 			{
-				me->m_Shared.Disguise( GetEnemyTeam( me->GetTeamNumber() ), RandomInt( TF_FIRST_NORMAL_CLASS, TF_LAST_NORMAL_CLASS-1 ) );
+				me->m_Shared.Disguise( GetEnemyTeam( me->GetTeamNumber() ), RandomInt( TF_FIRST_NORMAL_CLASS, TF_LAST_NORMAL_CLASS ) );
 			}
 		}
 	}
