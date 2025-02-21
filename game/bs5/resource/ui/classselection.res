@@ -787,7 +787,7 @@
 		"labelText"			"9"	[$WIN32]
 		"labelText"			""		[$X360]
 		"textAlignment"		"south-west"
-		"Command"			"select 9"
+		"Command"			"select 10"
 		"Default"			"0"
 		"font"				"MenuKeys"
 		"scaleImage"		"1"
