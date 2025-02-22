@@ -1100,6 +1100,13 @@ void CTFProjectile_Cleaver::Detonate( void )
 	Explode( &tr, GetDamageType() );
 }
 
+//#define TESTING_RUSSELL_GUN
+
+// Stupid but im about to switch branches and i want to push changes.
+#ifdef TESTING_RUSSELL_GUN
+#include "bs5/weapons/bs5_weapon_russell_pistol.h"
+#endif
+
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
@@ -1107,7 +1114,11 @@ CTFProjectile_Cleaver* CTFProjectile_Cleaver::Create( const Vector &position, co
 	const Vector &velocity, const AngularImpulse &angVelocity, 
 	CBaseCombatCharacter *pOwner, const CTFWeaponInfo &weaponInfo, int nSkin )
 {
+#ifndef TESTING_RUSSELL_GUN
 	CTFProjectile_Cleaver *pGrenade = static_cast<CTFProjectile_Cleaver*>( CBaseEntity::CreateNoSpawn( "tf_projectile_cleaver", position, angles, pOwner ) );
+#else
+	CBS5Projectile_RussellPistol* pGrenade = static_cast<CBS5Projectile_RussellPistol*>(CBaseEntity::CreateNoSpawn("bs5_projectile_russell_pistol", position, angles, pOwner));
+#endif
 	if ( pGrenade )
 	{
 		// Set the pipebomb mode before calling spawn, so the model & associated vphysics get setup properly.
@@ -1122,8 +1133,11 @@ CTFProjectile_Cleaver* CTFProjectile_Cleaver::Create( const Vector &position, co
 
 		pGrenade->ApplyLocalAngularVelocityImpulse( angVelocity );
 	}
-
+#ifndef TESTING_RUSSELL_GUN
 	return pGrenade;
+#else
+	return (CTFProjectile_Cleaver*)pGrenade;
+#endif
 }
 
 //-----------------------------------------------------------------------------

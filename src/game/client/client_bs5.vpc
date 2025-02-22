@@ -40,6 +40,16 @@ $Project "Client (Battle Supreme 5)"
 
 	$Folder	"Source Files"
 	{
+
+		$Folder "BS5"
+		{
+			$Folder "Weapons"
+			{
+				$File	"$SRCDIR/game/shared/bs5/weapons/bs5_weapon_russell_pistol.cpp"
+				$File	"$SRCDIR/game/shared/bs5/weapons/bs5_weapon_russell_pistol.h"
+			}
+		}
+
 		$Folder "HL1"
 		{
 			$File	"hl1\hl1_fx_gibs.cpp"

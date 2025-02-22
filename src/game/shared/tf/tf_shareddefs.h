@@ -521,6 +521,7 @@ enum ETFWeaponType
 	//
 	// ADD NEW WEAPONS HERE TO AVOID BREAKING DEMOS
 	//
+	BS5_WEAPON_RUSSELL_PISTOL,
 
 	TF_WEAPON_COUNT
 };
@@ -580,6 +581,7 @@ enum ProjectileType_t
 	TF_PROJECTILE_FLAME_BALL,	
 
 	// Add new entries here!
+	BS5_RUSSELL_PISTOL,
 
 	TF_NUM_PROJECTILES
 };
