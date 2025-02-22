@@ -31,6 +31,24 @@ $Project "Server (Battle Supreme 5)"
 
 		$Folder "HL1"
 		{
+			$Folder "Scientist"
+			{
+				$Folder "Behaviors"
+				{
+					$File	"hl1/monster_scientist/behaviors/monster_scientist_behavior.cpp"
+					$File	"hl1/monster_scientist/behaviors/monster_scientist_behavior.h"
+					$File	"hl1/monster_scientist/behaviors/monster_scientist_roam.cpp"
+					$File	"hl1/monster_scientist/behaviors/monster_scientist_roam.h"
+				}
+				$File	"hl1/monster_scientist/monster_scientist.cpp"
+				$File	"hl1/monster_scientist/monster_scientist.h"
+				$File	"hl1/monster_scientist/monster_scientist_intention.cpp"
+				$File	"hl1/monster_scientist/monster_scientist_intention.h"
+				$File	"hl1/monster_scientist/monster_scientist_locomotion.cpp"
+				$File	"hl1/monster_scientist/monster_scientist_locomotion.h"
+				$File	"hl1/monster_scientist/monster_scientist_body.cpp"
+				$File	"hl1/monster_scientist/monster_scientist_body.h"
+			}
 			$File	"hl1\hl1_npc_scientist.cpp"
 			$File	"hl1\hl1_npc_scientist.h"
 			$File	"hl1\hl1_npc_talker.cpp"
@@ -41,6 +59,7 @@ $Project "Server (Battle Supreme 5)"
 			$File	"hl1\hl1_ents.h"
 			$File	"hl1\hl1_basegrenade.cpp"
 			$File	"hl1\hl1_basegrenade.h"
+			$File	"hl1\hl1_npc_roach.cpp"
 			$File	"$SRCDIR\game\shared\hl1\hl1_shareddefs.h"
 		}
 
