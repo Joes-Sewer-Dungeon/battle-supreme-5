@@ -226,6 +226,11 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 		return new CTFBotSpyInfiltrate;
 	}
 
+	if ( me->IsPlayerClass( BS5_CLASS_RUSSELL ) )
+	{
+		return new CTFBotSniperLurk;
+	}
+
 	if ( !TheTFBots().IsMeleeOnly() )
 	{
 		if ( me->IsPlayerClass( TF_CLASS_SNIPER ) )
