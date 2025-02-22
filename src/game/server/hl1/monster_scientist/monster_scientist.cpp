@@ -33,3 +33,14 @@ void CMonsterScientist::Precache()
 	PrecacheModel("models/scientist.mdl");
 
 }
+
+bool CMonsterScientist::ShouldGib(const CTakeDamageInfo& info)
+{
+	if (info.GetDamageType() & DMG_NEVERGIB)
+			return false;
+
+	if ((g_pGameRules->Damage_ShouldGibCorpse(info.GetDamageType()) && m_iHealth < GIB_HEALTH_VALUE) || (info.GetDamageType() & DMG_ALWAYSGIB))
+		return true;
+
+	return false;
+}

@@ -22,6 +22,10 @@ public:
 	virtual CMonsterScientistIntention* GetIntentionInterface() const { return m_pIntention; };
 	virtual CMonsterScientistLocomotion* GetLocomotionInterface() const { return m_pLocomotion; };
 
+	virtual bool HasHumanGibs() { return true; };
+
+	virtual bool ShouldGib(const CTakeDamageInfo& info);
+
 private:
 
 	CMonsterScientistIntention* m_pIntention;

@@ -51,7 +51,7 @@ ActionResult< CMonsterScientist > CMonsterScientistRoam::Update( CMonsterScienti
 		if (selection.m_area)
 		{
 			CMonsterScientistPathCost cost( pScientist );
-			m_path.Compute( pScientist, selection.m_area->GetCenter(), cost );
+			m_path.Compute( pScientist, selection.m_area->GetRandomPoint(), cost );
 		}
 
 		m_tNextRoam.Start( RandomFloat( 5.0f, 10.0f ) );

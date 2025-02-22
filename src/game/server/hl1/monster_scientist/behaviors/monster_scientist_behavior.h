@@ -13,6 +13,7 @@ public:
 
 	virtual ActionResult< CMonsterScientist > Update( CMonsterScientist* pScientist, float flInterval );
 
+	virtual EventDesiredResult< CMonsterScientist > OnKilled(CMonsterScientist* me, const CTakeDamageInfo& info);
 };
 
 #endif // MONSTER_SCIENTIST_BEHAVIOR_H

@@ -12,6 +12,16 @@ public:
 	CMonsterScientistIntention( INextBot* pScientist );
 	virtual ~CMonsterScientistIntention() {};
 
+	virtual INextBotEventResponder* FirstContainedResponder(void) const 
+	{
+		return m_pCurrentBehavior;
+	} 
+
+	virtual INextBotEventResponder* NextContainedResponder(INextBotEventResponder* current) const 
+	{
+		return 0;
+	}
+
 	virtual void Reset();
 	virtual void Update();
 
